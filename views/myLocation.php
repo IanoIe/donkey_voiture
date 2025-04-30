@@ -55,8 +55,8 @@
                 </thead>
                 <tbody>
                 <?php
-                if ($reservations && count($reservations) > 0) {
-                    foreach ($reservations as $ligne) {
+                if ($locations && count($locations) > 0) {
+                    foreach ($locations as $ligne) {
                         echo "<tr>
                                 <td>{$ligne['city']}</td>
                                 <td>{$ligne['date_reservation']}</td>

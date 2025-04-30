@@ -1,21 +1,18 @@
 <?php
 require_once("./models/Base.php");
-require_once("./models/MyRegister.php");
+require_once("./models/MyLocation.php");
 
 class locationController {
-    private $MyLocation;
+    public function myLocation(){
+        $locationsObj = new MyLocation();
+        $locations = $locationsObj->getMyLocation();
 
-    public function __construct($pdo) {
-        $this->MyLocation = new MyLocation($pdo);
-    }
-
-    public function showCarLocation(){
-        $fullNameCity = $this->MyLocation->getCityFullName();
-        $dateReservationReservation = $this->MyLocation->getDateReservationReservation();
-        $dateRetourReservation = $this->MyLocation->getDateRetourReservation();
-        
-        require_once("./views/myLocation.php")
+        require("./views/myLocation.php");
     }
 }
 
-include "./views/myLogin.php";
+$location = new locationController();
+$location->myLocation();
+
+
+?>

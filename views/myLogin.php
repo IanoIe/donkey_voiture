@@ -6,18 +6,15 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
 </head>
 <body style="background-color: #73AD48;">
+<h1 class="text-white text-center mt-5">DONKEY VOITURE</h1>
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-5">
                 <div class="card">
                     <div class="mt-4 text-center">
-                        <h3>Connexion</h3>
+                        
                     </div>
                     <div class="card-body">
-                        <?php if (!empty($error)) : ?>
-                            <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
-                        <?php endif; ?>
-
                         <form method="POST" action="../index.php">
                             <div class="form-group">
                                 <input type="email" name="email" class="form-control" placeholder="Votre e-mail" required>
@@ -29,6 +26,10 @@
                                 <button type="submit" class="btn text-white" style="background-color: #73AD48;">Connexion</button>
                             </div>
                         </form>
+                        <div class="text-center mt-3">
+                            <span>Vous n’avez pas de compte ?</span>
+                            <a href="caminho_da_pagina_de_registo.php" style="color: blue; text-decoration: underline;"> Inscrivez-vous !</a>
+                        </div>
                     </div>
                 </div>
             </div>
