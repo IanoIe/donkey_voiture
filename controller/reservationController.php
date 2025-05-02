@@ -1,29 +1,17 @@
 <?php
-/*
-require_once('./models/MyReservation.php');
+    require_once("./models/Base.php");
+    require_once("./models/MyReservation.php");
 
 class reservationController {
-    
     public function myReservation() {
-        echo "Entrou no método myReservation<br>";
-
         $myReservationObj = new MyReservation();
-        $reservations = $myReservationObj->readMyReservation(); 
+        $reservations = $myReservationObj->getMyReservation(); 
 
-    
-        echo '<pre>';
-        var_dump($reservations); 
-        echo '</pre>';
-
-        if ($reservations) {
-            require("./views/myReservation.php");
-        } else {
-            echo "Nenhuma reserva encontrada.";
-        }
+        require("./views/myReservation.php");
     }
 }
 
-$controller = new reservationController();
-$controller->myReservation();
-*/
+$reservation = new reservationController();
+$reservation->myReservation();
+
 ?>

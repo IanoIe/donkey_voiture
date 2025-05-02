@@ -7,7 +7,6 @@
         $myAccountObj = new MyAccount();
         $user = $myAccountObj->readMyAccount();
 
-
         require("./views/myAccount.php");
         }
     }

@@ -28,7 +28,7 @@
                         </form>
                         <div class="text-center mt-3">
                             <span>Vous n’avez pas de compte ?</span>
-                            <a href="caminho_da_pagina_de_registo.php" style="color: blue; text-decoration: underline;"> Inscrivez-vous !</a>
+                            <a href="myRegister.php" style="color: blue; text-decoration: underline;">Inscrivez-vous !</a>
                         </div>
                     </div>
                 </div>

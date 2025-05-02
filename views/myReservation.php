@@ -1,7 +1,3 @@
-<?php
-    require_once("./controller/reservationController.php");
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,39 +42,42 @@
             <h1 class="text-white text-center mt-5" id="donkey_titre">DONKEY VOITURE</h1>
         </div>
 
-        <div style="margin-left: 50px;">
-            <h2>My Reservation</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>City</th>
-                        <th>Car</th>
-                        <th>Reservation date</th>
-                        <th>Return date</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <?php
-                if ($reservations && count($reservations) > 0) {
-                    foreach ($reservations as $ligne) {
-                        echo "<tr>
-                                <td>{$ligne['city']}</td>
-                                <td>{$ligne['car']}</td>
-                                <td>{$ligne['date_reservation']}</td>
-                                <td>{$ligne['date_retour']}</td>
-                                <td><button>Cancel</button></td>
-                              </tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='5'>Nenhuma reserva encontrada ou erro na consulta.</td></tr>";
-                }
-                
-                ?>
-                </tbody>
-            </table>
+        <div class="container mt-5">
+            <h2 class="mb-4">My Reservation</h2>
+            <div class="table-responsive custom-table-wrapper">
+                <table class="table">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>City</th>
+                            <th>Car</th>
+                            <th>Reservation date</th>
+                            <th>Return date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        if ($reservations && count($reservations) > 0) {
+                            foreach ($reservations as $ligne) {
+                                echo "<tr>
+                                         <td>{$ligne['fullname']}</td>
+                                         <td>{$ligne['marke']}</td>
+                                         <td>{$ligne['date_reservation']}</td>
+                                         <td>{$ligne['date_retour']}</td>
+                                         <td>
+                                            <a class='btn btn-primary btn-sm me-1' href='edit.php?id={$ligne['id']}'>Edit</a>
+                                            <a class='btn btn-warning btn-sm' href='cancel.php?id={$ligne['id']}'>Cancel</a>
+                                         </td>
+                                     </tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='5' class='text-center'>No reservation found or query error.</td></tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        
     </main>
 
     <footer style="background-color: #73AD48; 

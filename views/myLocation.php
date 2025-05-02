@@ -6,6 +6,37 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../assets/style.css">
     <title>Find A Car</title>
+
+    <style>
+    .form-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+        max-width: 400px;
+    }
+    .form-group label {
+        width: 130px;
+        font-weight: bold;
+    }
+    .form-group select {
+         width: 100%;
+         padding: 5px;
+    }
+    .submit-btn {
+        margin-top: 10px;
+    }
+    .btn {
+        padding: 10px 50px;
+        background-color: #73AD48;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    .btn:hover {
+        background-color: #5e913a;
+    }
+  </style>
 </head>
 <body>
     <header>
@@ -18,10 +49,10 @@
                 </ul>
                 <ul class="navbar-nav text-white">
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">Mon compte</a>
+                        <a class="nav-link text-white" href="myAccount.php">Mon compte</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">Mes réservations</a>
+                        <a class="nav-link text-white" href="myReservation.php">Mes réservations</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="#">Trouver une voiture</a>
@@ -44,35 +75,56 @@
 
         <div style="margin-left: 50px;">
             <h2>Find a car </h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>City</th>
-                        <th>Reservation date</th>
-                        <th>Return date</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <?php
-                if ($locations && count($locations) > 0) {
-                    foreach ($locations as $ligne) {
-                        echo "<tr>
-                                <td>{$ligne['city']}</td>
-                                <td>{$ligne['date_reservation']}</td>
-                                <td>{$ligne['date_retour']}</td>
-                                <td><button>Cancel</button></td>
-                              </tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='5'>Nenhuma reserva encontrada ou erro na consulta.</td></tr>";
-                }
-                
-                ?>
-                </tbody>
-            </table>
+
+            <form method="POST" action="index.php">
+                <div class="form-group">
+                    <label for="city">City:</label>
+                    <select name="city" id="city">
+                        <option value="">Select a City</option>
+                        <?php
+                        if (isset($cities) && !empty($cities)) {
+                            foreach ($cities as $city) {
+                                 echo "<option value='" . htmlspecialchars($city['id']) . "'>" . htmlspecialchars($city['fullname']) . "</option>";
+                            }
+                        }
+                    ?>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="date_reservation">Booking Date:</label>
+                    <select name="date_reservation" id="date_reservation">
+                        <option value="">Select a Date</option>
+                        <?php
+                        if (isset($reservations) && !empty($reservations)) {
+                            foreach ($reservations as $reservation) {
+                                echo "<option value='" . htmlspecialchars($reservation['date_reservation']) . "'>" . htmlspecialchars($reservation['date_reservation']) . "</option>";
+                            }
+                        }
+                    ?>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="date_retour">Return Date:</label>
+                    <select name="date_retour" id="date_retour">
+                        <option value="">Select a Date</option>
+                        <?php
+                        if (isset($date_retours) && !empty($date_retours)) {
+                            foreach ($date_retours as $date_retour) {
+                                echo "<option value='" . htmlspecialchars($date_retour['date_retour']) . "'>" . htmlspecialchars($date_retour['date_retour']) . "</option>";
+                            }
+                        }
+                        ?>
+                    </select>
+                </div>
+
+               <div class="submit-btn">
+                    <button type="submit" class="btn">Submit</button>
+                </div>
+            </form>
+
         </div>
-        
     </main>
 
     <footer style="background-color: #73AD48; 

@@ -11,7 +11,9 @@
     public $phone;
 
     public function readMyAccount(){
-        $sql = "SELECT firstName, lastName, email, phone FROM user";
+        $sql = "SELECT firstName, lastName, email, phone 
+                FROM user
+                WHERE id=1";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         

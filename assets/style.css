@@ -19,3 +19,25 @@ main {
 #donkey_titre{
     margin: 50px 50px;
 }
+
+
+.left-align-table {
+    margin-left: 0 !important;
+  }
+  
+  .table td, .table th {
+    text-align: center; /* centraliza texto das células */
+    vertical-align: middle;
+  }
+
+  
+  .custom-table-wrapper {
+    width: 60%;             /* Diminui a largura da tabela */
+    margin-left: 0;         /* Encosta na esquerda */
+  }
+
+  .table th,
+  .table td {
+    text-align: center;     /* Centraliza texto nas colunas */
+    vertical-align: middle;
+  }

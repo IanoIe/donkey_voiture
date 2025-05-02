@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../assets/style.css">
     <title>My Account</title>
 </head>
+
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-warning margin:">
@@ -46,39 +47,49 @@
             <h1 class="text-white text-center mt-5" id="donkey_titre">DONKEY VOITURE</h1>
         </div>
 
-        <div style="margin-left: 50px;">
-            <h2>My Account</h2>
-            <table>
-                <tbody>
+        <div class="container mt-5">
+            <h2 style="font-weight: bold;">My Account</h2>
+            <div>
+                <table>
+                    <tbody>
                     <?php
-                                       
-                    if ($user) {
-                        foreach ($user as $ligne){
-                            echo "<tr>
-                                      <th scope='row'>First Name: </th>
-                                      <td>".$ligne['firstName']."</td>;
-                                  </tr>;
-                                  <tr>
-                                      <th scope='row'>Last Name: </th>
-                                      <td>".$ligne['lastName']."</td>;
-                                  </tr>;
-                                  <tr>
-                                      <th scope='row'>Email: </th>
-                                      <td>".$ligne['email']."</td>;
-                                  </tr>;
-                                  <tr>
-                                      <th scope='row'>Phone Number: </th>
-                                      <td>".$ligne['phone']."</td>;
-                                  </tr>";
+                        if ($user) {
+                           foreach ($user as $ligne) {
+                                echo "<tr>
+                                         <th scope='row'>First Name:</th>
+                                         <td>{$ligne['firstName']}</td>
+                                      </tr>
+                                      <tr>
+                                         <th scope='row'>Last Name:</th>
+                                         <td>{$ligne['lastName']}</td>
+                                      </tr>
+                                      <tr>
+                                         <th scope='row'>Email:</th>
+                                         <td>
+                                            <a href='mailto:{$ligne['email']}' style='color: blue; text-decoration: underline;'>
+                                             {$ligne['email']} </a>
+                                         </td>
+                                       </tr>
 
-                              }
-                            } else {
-                                die("Query invalid");
+                                      <tr>
+                                         <th scope='row' style='padding-right: 20px;'>Phone Number:</th>
+                                         <td>{$ligne['phone']}</td>
+                                      </tr>";
                             }
-                    ?>  
-                </tbody>
-            </table>
+                        } else {
+                              die("Query invalid");
+                        }
+                    ?>
+                    </tbody>
+                </table>
+            </div>
+            <div style="display: inline-flex; gap: 10px; margin-top: 10px;">
+                <button onclick="window.location.href='modifier.php'">Modifier</button>
+                <button onclick="window.location.href='changer_mdp.php'">Changer de mot de passe</button>
+                <button onclick="window.location.href='supprimer_compte.php'"> Supprimer mon compte</button>
+            </div>
         </div>
+
         
     </main>
 

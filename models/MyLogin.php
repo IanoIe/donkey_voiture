@@ -1,9 +1,9 @@
 <?php
+    require_once("./config/db.php");
     require_once("Base.php");
 
     class MyLogin {
         private $pdo;
-
         public function __construct($pdo) {
             $this->pdo = $pdo;
         }
