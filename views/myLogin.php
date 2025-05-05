@@ -15,7 +15,7 @@
                         
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="../index.php">
+                        <form method="POST" action="">
                             <div class="form-group">
                                 <input type="email" name="email" class="form-control" placeholder="Votre e-mail" required>
                             </div>
@@ -28,7 +28,7 @@
                         </form>
                         <div class="text-center mt-3">
                             <span>Vous n’avez pas de compte ?</span>
-                            <a href="myRegister.php" style="color: blue; text-decoration: underline;">Inscrivez-vous !</a>
+                            <a href="/register.php" style="color: blue; text-decoration: underline;">Inscrivez-vous !</a>
                         </div>
                     </div>
                 </div>

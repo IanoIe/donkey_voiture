@@ -79,51 +79,29 @@
             <form method="POST" action="index.php">
                 <div class="form-group">
                     <label for="city">City:</label>
-                    <select name="city" id="city">
+                    <select name="fullname" id="city">
                         <option value="">Select a City</option>
                         <?php
-                        if (isset($cities) && !empty($cities)) {
-                            foreach ($cities as $city) {
-                                 echo "<option value='" . htmlspecialchars($city['id']) . "'>" . htmlspecialchars($city['fullname']) . "</option>";
+                             foreach ($cities as $city) {
+                                echo "<option value='" . htmlspecialchars($city['fullname']) . "'>" . htmlspecialchars($city['fullname']) . "</option>";
                             }
-                        }
-                    ?>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="date_reservation">Booking Date:</label>
-                    <select name="date_reservation" id="date_reservation">
-                        <option value="">Select a Date</option>
-                        <?php
-                        if (isset($reservations) && !empty($reservations)) {
-                            foreach ($reservations as $reservation) {
-                                echo "<option value='" . htmlspecialchars($reservation['date_reservation']) . "'>" . htmlspecialchars($reservation['date_reservation']) . "</option>";
-                            }
-                        }
-                    ?>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="date_retour">Return Date:</label>
-                    <select name="date_retour" id="date_retour">
-                        <option value="">Select a Date</option>
-                        <?php
-                        if (isset($date_retours) && !empty($date_retours)) {
-                            foreach ($date_retours as $date_retour) {
-                                echo "<option value='" . htmlspecialchars($date_retour['date_retour']) . "'>" . htmlspecialchars($date_retour['date_retour']) . "</option>";
-                            }
-                        }
                         ?>
-                    </select>
+                     </select>
+                </div>
+                <div class="form-group">
+                    <label for="birthday">Booking Date:</label>
+                    <input type="date" id="birthday" name="date_reservation">
                 </div>
 
-               <div class="submit-btn">
-                    <button type="submit" class="btn">Submit</button>
+                <div class="form-group">
+                    <label for="birthday">Return Date:</label>
+                    <input type="date" id="birthday" name="date_reservation">
                 </div>
             </form>
 
+            <div class="submit-btn">
+                <button type="submit" class="btn">Submit</button>
+            </div>
         </div>
     </main>
 

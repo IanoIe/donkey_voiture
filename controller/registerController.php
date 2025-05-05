@@ -1,4 +1,6 @@
 <?php
+
+
 require_once("./models/Base.php");
 require_once("./models/MyRegister.php");
 
@@ -13,9 +15,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $myRegister = new MyRegister(); 
     if ($myRegister->createRegister($firstName, $lastName, $gender, $phone, $email, $pass)) {
         echo "Success register!";
+        header('Location: http://localhost:8000/');
     } else {
         echo "Error register";
     }
 }
 
-include "./views/myLogin.php";
+include "./views/myRegister.php";

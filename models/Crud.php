@@ -2,13 +2,13 @@
 
      interface Crud {
 
-        public function Create();
+        public function create();
 
-        public function Read();
+        public function read();
 
-        public function Update();
+        public function update();
 
-        public function Delete();
+        public function delete();
      }
 
 ?>

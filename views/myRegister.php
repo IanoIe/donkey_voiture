@@ -16,7 +16,7 @@
                         <p class="text-black text-center">Formulaire d’inscription</p>
                     </div>
                     <div class="card-body">
-                        <form id="registrationForm" action="../index.php" method="POST">
+                        <form id="registrationForm" action="../register.php" method="POST">
 
                             <div class="form-group">
                                 <input type="text" class="form-control" name="firstName" placeholder="First Name" required />
