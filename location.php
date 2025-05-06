@@ -1,3 +1,3 @@
 <?php
-   require_once('./controller/locationController.php');
+     require_once('./controller/locationController.php');
 ?>

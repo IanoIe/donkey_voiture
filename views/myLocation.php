@@ -73,34 +73,41 @@
             <h1 class="text-white text-center mt-5" id="donkey_titre">DONKEY VOITURE</h1>
         </div>
 
-        <div style="margin-left: 50px;">
-            <h2>Find a car </h2>
+        <div style="display: flex; justify-content: space-evenly;">
+            <div style="margin-left: 50px;">
+                <h2>Find a car </h2>
 
-            <form method="POST" action="index.php">
+                <form method="POST" action="/listCars.php">
                 <div class="form-group">
                     <label for="city">City:</label>
-                    <select name="fullname" id="city">
+                    <select name="fullname" id="fullname" required>
                         <option value="">Select a City</option>
-                        <?php
-                             foreach ($cities as $city) {
-                                echo "<option value='" . htmlspecialchars($city['fullname']) . "'>" . htmlspecialchars($city['fullname']) . "</option>";
-                            }
-                        ?>
-                     </select>
+                        <?php foreach ($cities as $city): ?>
+                            <option value="<?= htmlspecialchars($city['id']) ?>"><?= htmlspecialchars($city['fullname']) ?></option>
+                        <?php endforeach; ?>
+                    </select>
+
                 </div>
                 <div class="form-group">
                     <label for="birthday">Booking Date:</label>
-                    <input type="date" id="birthday" name="date_reservation">
+                    <input type="date" id="date_reservation" name="date_reservation" required>
                 </div>
 
                 <div class="form-group">
                     <label for="birthday">Return Date:</label>
-                    <input type="date" id="birthday" name="date_reservation">
+                    <input type="date" id="date_retour" name="date_retour" required>
+                </div>
+
+                <div class="submit-btn">
+                    <button type="submit" class="btn">Submit</button>
                 </div>
             </form>
 
-            <div class="submit-btn">
-                <button type="submit" class="btn">Submit</button>
+                
+            </div>
+
+            <div class="img-car">
+                <img style="border-radius: 30px;" src="../img/car.jpg" alt="Car of reservation" width="300" height="250">
             </div>
         </div>
     </main>

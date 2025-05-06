@@ -1,7 +1,4 @@
 <?php
-
-
-
     require_once("./config/db.php");
     require_once("Base.php");
 class MyLogin extends Base {
