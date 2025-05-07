@@ -20,19 +20,19 @@
 
                             <div class="form-group">
                                 <input type="text" class="form-control" name="firstName" placeholder="First Name" required />
-                            </div>
+                            </div><br>
                             <div class="form-group">
                                 <input type="text" class="form-control" name="lastName" placeholder="Last Name" required />
-                            </div>
+                            </div><br>
                             <div class="form-group">
                                 <input type="text" class="form-control" name="civilite" placeholder="Gender" required />
-                            </div>
+                            </div><br>
                             <div class="form-group">
                                 <input type="number" class="form-control" name="phone" placeholder="Phone" required />
-                            </div>
+                            </div><br>
                             <div class="form-group">
                                 <input type="email" class="form-control" name="email" placeholder="E-mail" required />
-                            </div>
+                            </div><br>
                             <div class="form-group"> 
                                 <input type="password" class="form-control" name="pass" placeholder="Password" required />
                             </div>
