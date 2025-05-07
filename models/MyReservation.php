@@ -1,22 +1,21 @@
 <?php
-require_once("./config/db.php");
-require_once("Base.php");
-
+     require_once("./config/db.php");
+     require_once("Base.php");
 class MyReservation extends Base {
-    public function getMyReservation() {
+    public function getReservationsByUser() {
         try {
             $sql = "SELECT city.fullname, car.marke, reservation.date_reservation, reservation.date_retour
-                    FROM city 
+                    FROM city
                     INNER JOIN car ON city.id = car.city_id
                     INNER JOIN reservation ON reservation.car_id = car.id
-                    WHERE reservation.user_id = 1";
+                    WHERE reservation.user_id = :user_id";
+
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute();
-    
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            echo 'Error: ' . $e->getMessage();
+        } catch (PDOException $ex) {
+            throw new Exception("Error : " . $ex->getMessage());
         }
-    }    
+    }   
 }
 ?>

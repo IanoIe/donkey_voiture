@@ -1,9 +1,17 @@
+<?php
+session_start();
+if (empty($_SESSION['id'])) {
+    header("Location: login.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/style.css">
     <title>My List Cars</title>
 </head>
@@ -41,7 +49,7 @@
             <h1 class="text-white text-center mt-5" id="donkey_titre">DONKEY VOITURE</h1>
         </div>
         <div>
-            <h3 style="transform: translateX(15%);">City: <?= htmlspecialchars($car['city.fullname']) ?> </h3>
+            <h3 style="transform: translateX(15%);">City: <?php echo $_SESSION['fullname'] ?> </h3>
         </div>
         <div class="container mt-4">
             <div class="row">
@@ -50,8 +58,8 @@
                         <div class="card shadow-sm">
                             <div class="card-body border border-3">
                                 <h5 class="card-title"><?= htmlspecialchars($car['marke']) ?></h5>
-                                <p class="card-text"><strong>Date of Reservation:</strong> <?= htmlspecialchars($car['date_reservation']) ?></p>
-                        <p class="card-text"><strong>Date of Retour:</strong> <?= htmlspecialchars($car['date_retour']) ?></p>
+                                <p class="card-text"><strong>Date of Reservation:</strong> <?php echo $_SESSION['date_reservation']; ?></p>
+                                <p class="card-text"><strong>Date of Retour:</strong> <?php echo $_SESSION['date_retour']; ?></p>
                         <button type="button" class="btn btn-warning float-right">Réserver</button>
                     </div>
                 </div>

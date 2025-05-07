@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/style.css">
     <title>My Reservation</title>
 </head>
@@ -57,7 +57,7 @@
                     </thead>
                     <tbody>
                         <?php
-                        if ($reservations && count($reservations) > 0) {
+                        if (isset($reservations) && count($reservations) > 0) {
                             foreach ($reservations as $ligne) {
                                 echo "<tr>
                                          <td>{$ligne['fullname']}</td>

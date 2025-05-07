@@ -1,12 +1,4 @@
 <?php
-
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    echo 'Dados recebidos: ';
-    print_r($_POST);
-}
-
-
 require_once("./models/Base.php");
 require_once("./models/MyRegister.php");
 
