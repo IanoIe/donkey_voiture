@@ -1,6 +1,6 @@
 <?php
-     require_once("./config/db.php"); 
-     require_once("Base.php");        
+require_once("./config/db.php"); 
+require_once("Base.php");        
 
 class MyLocation extends Base {
 

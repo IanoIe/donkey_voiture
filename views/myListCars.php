@@ -8,7 +8,7 @@
     <title>My List Cars</title>
 </head>
 <body>
-<header>
+    <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-warning margin:">
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ms-auto">
@@ -40,23 +40,26 @@
         <div>
             <h1 class="text-white text-center mt-5" id="donkey_titre">DONKEY VOITURE</h1>
         </div>
-        <div>
-            <h3 style="transform: translateX(15%);">City: <?php echo $_SESSION['fullname'] ?> </h3>
-        </div>
-        <div class="container mt-4">
-            <div class="row">
-                <?php foreach ($cars as $car): ?>
+
+        <form method="POST" action="/reservInfoIndex.php">
+            <div>
+                <h3 style="transform: translateX(15%);">City: <?php echo $_SESSION['fullname'] ?> </h3>
+            </div>
+            <div class="container mt-4">
+                <div class="row">
+                    <?php foreach ($cars as $car): ?>
                     <div class="col-md-4 mb-4">
                         <div class="card shadow-sm">
                             <div class="card-body border border-3">
                                 <h5 class="card-title"><?= htmlspecialchars($car['marke']) ?></h5>
                                 <p class="card-text"><strong>Date of Reservation:</strong> <?php echo $_SESSION['date_reservation']; ?></p>
                                 <p class="card-text"><strong>Date of Retour:</strong> <?php echo $_SESSION['date_retour']; ?></p>
-                        <button type="button" class="btn btn-warning float-right">Réserver</button>
+                        <button type="submit" class="btn btn-warning float-right">Réserver</button>
                     </div>
                 </div>
             </div>
-        <?php endforeach; ?>
+            <?php endforeach; ?>
+        </form>
     </div>
 </div>
 

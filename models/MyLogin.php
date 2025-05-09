@@ -1,7 +1,8 @@
 <?php
-    require_once("./config/db.php");
-    require_once("Base.php");
+require_once("./config/db.php");
+require_once("Base.php");
 class MyLogin extends Base {
+
     public function __construct() {
         parent::__construct(); // calls the Base constructor and initializes $pdo
     }
@@ -14,7 +15,8 @@ class MyLogin extends Base {
             return $user['id'];
         }
         return false;
-    }
+    }    
 }
-
 ?>
+
+

@@ -16,7 +16,7 @@
                         
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="">
+                        <form method="POST" action="/index.php">
                             <div class="form-group">
                                 <input type="email" name="email" class="form-control" placeholder="Votre e-mail" required>
                             </div><br>

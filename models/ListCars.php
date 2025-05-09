@@ -1,7 +1,6 @@
 <?php
+require_once("./config/db.php");
 require_once("./models/Base.php");
-require_once("./models/MyReservation.php");
-require_once("./models/ListCars.php");
 
 class ListCars extends Base {
     public function getCarsByCityName($city_id) {

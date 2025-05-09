@@ -1,5 +1,5 @@
-<?php
-    require("./models/MyAccount.php");
+<?php    
+require("./models/MyAccount.php");
 
     class myAccountController {
         public function myAccount() {

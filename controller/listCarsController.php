@@ -1,8 +1,8 @@
 <?php
-     require_once("./models/Base.php");
-     require_once("./models/ListCars.php");
-     require_once("./models/MyLocation.php");
-class ListCarsController {
+require_once("./models/ListCars.php");
+require_once("./models/MyLocation.php");
+
+class listCarsController {
 
     public function showListCars() { 
         $location = new MyLocation();
@@ -41,6 +41,6 @@ class ListCarsController {
     }
 }
 
-$listCars = new ListCarsController();
+$listCars = new listCarsController();
 $listCars->showListCars();
 ?>
