@@ -28,7 +28,4 @@ class registerController {
     include "./views/myRegister.php";
   }
 }
-
-$userController = new registerController();
-$userController->register();
 ?>

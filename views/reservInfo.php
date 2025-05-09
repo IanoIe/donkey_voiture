@@ -1,15 +1,12 @@
 <?php
-     session_start();  
-     if (isset($_SESSION['car'], $_SESSION['date_reservation'], $_SESSION['date_retour'], $_SESSION['firstName'], $_SESSION['lastName'], $_SESSION['phoneNumber'])):
-
+session_start();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" >
     <link rel="stylesheet" href="../assets/style.css">
     <title>Reservation $ Infor User</title>
 </head>
@@ -24,10 +21,10 @@
                 </ul>
                 <ul class="navbar-nav text-white">
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">Mon compte</a>
+                        <a class="nav-link text-white" href="myAccount.php">Mon compte</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">Mes réservations</a>
+                        <a class="nav-link text-white" href="myReservation.php">Mes réservations</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="#">Trouver une voiture</a>
@@ -47,47 +44,26 @@
             <h1 class="text-white text-center mt-5" id="donkey_titre">DONKEY VOITURE</h1>
         </div>
         
-        <div class="container mt-5 w-10">
-            <div class="row g-5">
-            <?php
-            // views/reservInfo.php
-
-            // Verifica se as variáveis de sessão estão definidas
-            if (isset($_SESSION['car'], $_SESSION['date_reservation'], $_SESSION['date_retour'])):
-            ?>
-            <div class="col-md-4">
-                <div class="card border-primary mb-3">
-                    <div class="card-body">
-                        <h3 class="text-left"><?= htmlspecialchars($_SESSION['car']) ?></h3>
-                        <p><strong>Data da Reserva:</strong> <?= htmlspecialchars($_SESSION['date_reservation']) ?></p>
-                        <p><strong>Data de Retorno:</strong> <?= htmlspecialchars($_SESSION['date_retour']) ?></p>
+        <div class="container mt-5">
+            <h2>Lista de Carros Disponíveis</h2>
+            <form method="POST" action="/reservInfo.php">
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <p><?= htmlspecialchars($city_name) ?></p>
+                                <p>Date of Reservation: <?=htmlspecialchars($date_reservation) ?></p>
+                                <p>Date of Retour: <?=htmlspecialchars($date_retour) ?></p>
+                                <button type="submit" class="btn btn-warning">Réserver</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-<?php
-else:
-    echo '<p class="alert alert-warning">Nenhuma informação de reserva encontrada.</p>';
-endif;
-?>
-
-
-                <div class="col-md-4">
-                    <div class="mb-3">
-                        <h3 class="text-left">Info</h3>
-                        <p>First Name: <?= htmlspecialchars($_SESSION['firstName']) ?></p>
-                        <p>Last Name: <?= htmlspecialchars($_SESSION['lastName']) ?></p>
-                        <p>Phone Number: <?= htmlspecialchars($_SESSION['phoneNumber']) ?></p>
-                    </div>
-                </div>
-                
-                <?php
-                
-else:
-    echo '<p>Informações de reserva não disponíveis.</p>';
-endif;
-?>
-            </div>
+            </form>
         </div>
+
+
+            
 
         <div class="container mt-5">
             <div class="column">

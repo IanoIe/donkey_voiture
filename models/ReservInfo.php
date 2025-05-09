@@ -16,12 +16,19 @@ require_once("Base.php");
                 $stmt->bindParam(':car_id', $carId, PDO::PARAM_INT);
                 $stmt->execute();
     
-                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                if ($result) {
+                    return $result;
+                } else {
+                    return null; // ou lançar uma exceção personalizada
+                }
             } catch (PDOException $ex) {
-                echo "Erro: " . $ex->getMessage();
-                return null;
+                // Logar o erro
+                error_log("Erro ao recuperar informações de reserva: " . $ex->getMessage());
+                // Lançar uma exceção personalizada
+                throw new Exception("Erro ao recuperar informações de reserva.");
             }
         }
     }
-
+    
 ?>

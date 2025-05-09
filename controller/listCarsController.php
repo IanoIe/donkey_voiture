@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once("./models/ListCars.php");
 require_once("./models/MyLocation.php");
 
@@ -40,7 +41,4 @@ class listCarsController {
         require("./views/myListCars.php");
     }
 }
-
-$listCars = new listCarsController();
-$listCars->showListCars();
 ?>

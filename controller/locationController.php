@@ -9,8 +9,4 @@ class locationController {
         require("./views/myLocation.php");
     }
 }
-
-
-$controller = new locationController();
-$controller->myLocation();
 ?>

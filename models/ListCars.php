@@ -29,6 +29,24 @@ class ListCars extends Base {
             return [];
         }
     }  
+
+    // Function que vai permitir pegar os dados na pagina anterior para pagina seguinte 
+    public function showCarsByCity($city_id) {
+        try {
+            $cars = $this->getCarsByCityName($city_id);
+            include __DIR__ . "/../views/myListCars.php";
+        }catch (Exception $ex) {
+            echo ("Error: ". $ex->getMessage());
+        }
+    }
+
+    public function reservationCar($car_id) {
+        try {
+            $reservations = $this->getReservationsByCar($car_id);
+        } catch (Exception $ex) {
+            echo ("Error: ".$ex->getMessage());
+        }
+    }
 }
 ?>
 

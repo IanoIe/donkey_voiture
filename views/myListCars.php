@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/style.css">
     <title>My List Cars</title>
 </head>
@@ -54,11 +54,13 @@
                                 <h5 class="card-title"><?= htmlspecialchars($car['marke']) ?></h5>
                                 <p class="card-text"><strong>Date of Reservation:</strong> <?php echo $_SESSION['date_reservation']; ?></p>
                                 <p class="card-text"><strong>Date of Retour:</strong> <?php echo $_SESSION['date_retour']; ?></p>
-                        <button type="submit" class="btn btn-warning float-right">Réserver</button>
+                                <button type="submit" class="btn btn-warning float-right">Réserver</button>
+                            </div>
+                        </div>
                     </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
-            <?php endforeach; ?>
         </form>
     </div>
 </div>

@@ -1,4 +1,4 @@
-<?php    
+<?php   
 require("./models/MyAccount.php");
 
     class myAccountController {
