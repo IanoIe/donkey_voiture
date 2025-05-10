@@ -7,12 +7,13 @@ class ReservInfoController {
         $reservInfo = new ReservInfo();
         
         session_start();
-        $city_name = $_SESSION['fullname'] ?? 'N/A';
-        $date_reservation = $_SESSION['date_reservation'] ?? 'N/A';
-        $date_retour = $_SESSION['date_retour'] ?? 'N/A';
+        $city_name = isset($_SESSION['fullname']) ? $_SESSION['fullname'] : 'N/A';
+        $carsMarke = isset($_SESSION['car_marke']) ? $_SESSION['car_marke'] : 'N/A';
+        $date_reservation = isset($_SESSION['date_reservation']) ? $_SESSION['date_reservation'] : 'N/A';
+        $date_retour = isset($_SESSION['date_retour']) ? $_SESSION['date_retour'] : 'N/A';
 
         // Passando os dados para o método do modelo
-        $info = $reservInfo->getReservInfoUnik($carId, $city_name, $date_reservation, $date_retour);
+        $info = $reservInfo->getReservInfoUnik($carId, $city_name, $carsMarke, $date_reservation, $date_retour);
         require("./views/reservInfo.php");
     }
 }

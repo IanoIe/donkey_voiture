@@ -41,29 +41,30 @@
             <h1 class="text-white text-center mt-5" id="donkey_titre">DONKEY VOITURE</h1>
         </div>
 
-        <form method="POST" action="/reservInfoIndex.php">
-            <div>
-                <h3 style="transform: translateX(15%);">City: <?php echo $_SESSION['fullname'] ?> </h3>
-            </div>
-            <div class="container mt-4">
-                <div class="row">
-                    <?php foreach ($cars as $car): ?>
-                    <div class="col-md-4 mb-4">
-                        <div class="card shadow-sm">
-                            <div class="card-body border border-3">
-                                <h5 class="card-title"><?= htmlspecialchars($car['marke']) ?></h5>
-                                <p class="card-text"><strong>Date of Reservation:</strong> <?php echo $_SESSION['date_reservation']; ?></p>
-                                <p class="card-text"><strong>Date of Retour:</strong> <?php echo $_SESSION['date_retour']; ?></p>
+        <div>
+            <h3 style="transform: translateX(15%);">City: <?php echo $_SESSION['fullname'] ?> </h3>
+        </div>
+        <div class="container mt-4">
+            <div class="row">
+                <?php foreach ($cars as $car): ?>
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-body border border-3">
+                            <h5 class="card-title"><?= htmlspecialchars($car['marke']) ?></h5>
+                            <p class="card-text"><strong>Date of Reservation:</strong> <?php echo $_SESSION['date_reservation']; ?></p>
+                            <p class="card-text"><strong>Date of Retour:</strong> <?php echo $_SESSION['date_retour']; ?></p>
+                            <form method="POST" action="/reservInfoIndex.php">
+                                <input type="hidden" name="car_id" value="<?= $car['id'] ?>">
                                 <button type="submit" class="btn btn-warning float-right">Réserver</button>
-                            </div>
+                            </form>
                         </div>
                     </div>
-                    <?php endforeach; ?>
-                </div>
+                 </div>
+                <?php endforeach; ?>
             </div>
-        </form>
+        </div>
     </div>
-</div>
+
 
     </main>
 

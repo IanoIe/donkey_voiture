@@ -8,36 +8,41 @@ class listCarsController {
     public function showListCars() { 
         $location = new MyLocation();
         $carsModel = new ListCars();
-            
         $cars = [];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') { 
-            $city_name = $_POST['fullname'] ?? '';
+            $cityId = $_POST['fullname'] ?? '';
             $date_reservation = $_POST['date_reservation'] ?? '';
             $date_retour = $_POST['date_retour'] ?? '';
+            
+            if (empty($cityId) || empty($date_reservation) || empty($date_retour)) {
+                echo "error: ";
 
-            if (empty($city_name) || empty($date_reservation) || empty($date_retour)) {
-                echo "error";
-            } else {
-                // Assainissement des données
-                $city_name = htmlspecialchars($city_name);
-                $date_reservation = htmlspecialchars($date_reservation);
-                $date_retour = htmlspecialchars($date_retour);
+                } else {
+                    $cityId = htmlspecialchars($cityId, ENT_QUOTES, 'UTF-8');
+                    $date_reservation = htmlspecialchars($date_reservation, ENT_QUOTES, 'UTF-8');
+                    $date_retour = htmlspecialchars($date_retour, ENT_QUOTES, 'UTF-8');
 
-                session_start();
-                $_SESSION['fullname'] = $city_name;
-                $_SESSION['date_reservation'] = $date_reservation;
-                $_SESSION['date_retour'] = $date_retour;
+                    // Fetch city name (to display in session/view)
+                    $cityData = $location->getCityById($cityId);
+                    $city_name = $cityData['fullname'] ?? '';
 
-                // The cars in
-                $cars = $carsModel->getCarsByCityName($city_name);
-                
-                $_SESSION['fullname'] = $cars[0]['fullname'];
-                if (empty($cars)) {
-                    echo " Il y a pas de cars";
+                    // Update session with name and dates
+                    $_SESSION['fullname'] = $city_name;
+                    $_SESSION['date_reservation'] = $date_reservation;
+                    $_SESSION['date_retour'] = $date_retour;
+
+                // Search for cars by city ID
+                $cars = $carsModel->getCarsByCityName($cityId);
+            
+            if (!empty($cars)) {
+                $_SESSION['car_marke'] = $cars['id']['marke'];
+                } else {
+                    echo "There are no cars available";
                 }
             }
         }
+
         require("./views/myListCars.php");
     }
 }

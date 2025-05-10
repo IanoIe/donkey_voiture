@@ -1,6 +1,8 @@
 <?php
 session_start();
+$car_marke = $_SESSION['car_marke'] ?? 'N/A';
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,24 +47,31 @@ session_start();
         </div>
         
         <div class="container mt-5">
-            <h2>Lista de Carros Disponíveis</h2>
             <form method="POST" action="/reservInfo.php">
                 <div class="row">
                     <div class="col-md-4 mb-4">
                         <div class="card shadow-sm">
                             <div class="card-body">
-                                <p><?= htmlspecialchars($city_name) ?></p>
+                                <p><?= htmlspecialchars($car_marke) ?></p>
                                 <p>Date of Reservation: <?=htmlspecialchars($date_reservation) ?></p>
                                 <p>Date of Retour: <?=htmlspecialchars($date_retour) ?></p>
-                                <button type="submit" class="btn btn-warning">Réserver</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-4">
+                        <div>
+                            <div>
+                                <h2>Info</h2>
+                                <p>Last Name: <?=htmlspecialchars($lastName) ?></p>
+                                <p>Fist Name: <?=htmlspecialchars($firstName) ?></p>
+                                <p>Phone Number: <?=htmlspecialchars($firstName) ?></p>
                             </div>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
-
-
             
 
         <div class="container mt-5">

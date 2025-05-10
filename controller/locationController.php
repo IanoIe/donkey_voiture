@@ -1,6 +1,6 @@
 <?php
 require_once("./models/MyLocation.php");
-
+    
 class locationController {
     public function myLocation() {
         $location = new MyLocation(); 

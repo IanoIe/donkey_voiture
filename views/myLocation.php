@@ -78,32 +78,29 @@
                 <h2>Find a car </h2>
 
                 <form method="POST" action="/listCars.php">
-                <div class="form-group">
-                    <label for="city">City:</label>
-                    <select name="fullname" id="fullname" required>
-                        <option value="">Select a City</option>
-                        <?php foreach ($cities as $city): ?>
-                            <option value="<?= htmlspecialchars($city['id']) ?>"><?= htmlspecialchars($city['fullname']) ?></option>
-                        <?php endforeach; ?>
-                    </select>
+                    <div class="form-group">
+                        <label for="city">City:</label>
+                        <select name="fullname" id="fullname" required>
+                            <option value="">Select a City</option>
+                            <?php foreach ($cities as $city): ?>
+                                <option value="<?= htmlspecialchars($city['id']) ?>"><?= htmlspecialchars($city['fullname']) ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="birthday">Booking Date:</label>
+                        <input type="date" id="date_reservation" name="date_reservation" required>
+                    </div>
 
-                </div>
-                <div class="form-group">
-                    <label for="birthday">Booking Date:</label>
-                    <input type="date" id="date_reservation" name="date_reservation" required>
-                </div>
+                    <div class="form-group">
+                        <label for="birthday">Return Date:</label>
+                        <input type="date" id="date_retour" name="date_retour" required>
+                    </div>
 
-                <div class="form-group">
-                    <label for="birthday">Return Date:</label>
-                    <input type="date" id="date_retour" name="date_retour" required>
-                </div>
-
-                <div class="submit-btn">
-                    <button type="submit" class="btn">Submit</button>
-                </div>
-            </form>
-
-                
+                    <div class="submit-btn">
+                        <button type="submit" class="btn">Submit</button>
+                    </div>
+                </form>
             </div>
 
             <div class="img-car">

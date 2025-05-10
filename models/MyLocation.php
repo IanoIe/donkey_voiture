@@ -16,6 +16,18 @@ class MyLocation extends Base {
             echo "Erro: " . $ex->getMessage();
         }
     }
+
+    public function getCityById($id) {
+        try {
+            $sql = "SELECT * FROM city WHERE id = ?";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([$id]);
+
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $ex) {
+            echo "Error: ".$ex->getMessage();
+        }
+    }
 }
 ?>
 
