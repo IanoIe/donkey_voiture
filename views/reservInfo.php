@@ -1,6 +1,5 @@
 <?php
 session_start();
-$car_marke = $_SESSION['car_marke'] ?? 'N/A';
 ?>
 
 <!DOCTYPE html>
@@ -52,7 +51,8 @@ $car_marke = $_SESSION['car_marke'] ?? 'N/A';
                     <div class="col-md-4 mb-4">
                         <div class="card shadow-sm">
                             <div class="card-body">
-                                <p><?= htmlspecialchars($car_marke) ?></p>
+                                <p><?= htmlspecialchars($car_id = $_POST['car_id'] ?? null); ?></p>
+                                <p><strong>Marca:</strong> <?= htmlspecialchars($car_marke) ?></p>
                                 <p>Date of Reservation: <?=htmlspecialchars($date_reservation) ?></p>
                                 <p>Date of Retour: <?=htmlspecialchars($date_retour) ?></p>
                             </div>
@@ -63,9 +63,9 @@ $car_marke = $_SESSION['car_marke'] ?? 'N/A';
                         <div>
                             <div>
                                 <h2>Info</h2>
-                                <p>Last Name: <?=htmlspecialchars($lastName) ?></p>
-                                <p>Fist Name: <?=htmlspecialchars($firstName) ?></p>
-                                <p>Phone Number: <?=htmlspecialchars($firstName) ?></p>
+                                <p>Last Name: <?= htmlspecialchars($user['lastName']) ?></p>
+                                <p>First Name: <?= htmlspecialchars($user['firstName']) ?></p>
+                                <p>Phone Number: <?= htmlspecialchars($user['phone']) ?></p>
                             </div>
                         </div>
                     </div>

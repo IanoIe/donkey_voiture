@@ -3,21 +3,49 @@ require_once("./models/ReservInfo.php");
 
 class ReservInfoController {
     public function reservInfo() {
-        $carId = isset($_GET['car_id']) && is_numeric($_GET['car_id']) ? (int) $_GET['car_id'] : 1;
-        $reservInfo = new ReservInfo();
-        
         session_start();
-        $city_name = isset($_SESSION['fullname']) ? $_SESSION['fullname'] : 'N/A';
-        $carsMarke = isset($_SESSION['car_marke']) ? $_SESSION['car_marke'] : 'N/A';
-        $date_reservation = isset($_SESSION['date_reservation']) ? $_SESSION['date_reservation'] : 'N/A';
-        $date_retour = isset($_SESSION['date_retour']) ? $_SESSION['date_retour'] : 'N/A';
+        
+        $carId = isset($_POST['car_id']) && is_numeric($_POST['car_id']) ? (int) $_POST['car_id'] : null;
+        
+        if (!$carId) {
+            die("Id car invalid");
+        }
 
-        // Passando os dados para o método do modelo
-        $info = $reservInfo->getReservInfoUnik($carId, $city_name, $carsMarke, $date_reservation, $date_retour);
-        require("./views/reservInfo.php");
+        $reservInfo = new ReservInfo();
+    
+        $city_name = $_SESSION['fullname'] ?? 'N/A';
+        $car_marke = $_SESSION['car_marke'] ?? 'N/A';
+        $date_reservation = $_SESSION['date_reservation'] ?? 'N/A';
+        $date_retour = $_SESSION['date_retour'] ?? 'N/A';
+
+        // Busca do banco
+        $info = $reservInfo->getReservInfoUnik($carId);
+
+         $userId = $_SESSION['user_id'] ?? null; // Certifique-se de ter o id do usuário na sessão
+        if ($userId) {
+            $user = $reservInfo->getUser($userId);
+        } else {
+            $user = null;
+        }
+    // Disponibilizar variáveis para a view
+    require("./views/reservInfo.php");
+   }
+   
+
+    public function reservInfoUser($idUser) {
+        echo "Método reservInfoUser chamado com idUser = $idUser<br>"; // Teste de depuração
+        $reservInfo = new ReservInfo();
+        try {
+            $user = $reservInfo->getUser($idUser);
+            if ($user) {
+                include("./views/reservInfo.php");
+            } else {
+                echo "User not found"; 
+            }
+        } catch (Exception $ex) {
+            echo "Error: " . $ex->getMessage();
+        }
     }
-}
 
-$reservInfoController = new ReservInfoController();
-$reservInfoController->reservInfo();
+}
 ?>
