@@ -10,7 +10,7 @@ class ReservInfo extends Base {
      */
     public function getReservInfoUnik($carId) {
         try {
-            $sql = "SELECT car.marke, reservation.date_reservation, reservation.date_retour
+            $sql = "SELECT car.marke, reservation.price, reservation.date_reservation, reservation.date_retour
                     FROM car
                     INNER JOIN reservation ON car.id = reservation.car_id
                     WHERE car.id = :car_id";
@@ -24,8 +24,8 @@ class ReservInfo extends Base {
                 return null;
             }
         } catch (PDOException $ex) {
-            error_log("Erro ao recuperar informações da reserva: " . $ex->getMessage());
-            throw new Exception("Erro ao recuperar informações da reserva.");
+            error_log("Error retrieving booking information: " . $ex->getMessage());
+            throw new Exception("Error retrieving booking information.");
         }
     }
 

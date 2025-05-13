@@ -1,8 +1,13 @@
 <?php
 session_start();
 
+echo "<pre>";
+print_r($_SESSION);
+echo "</pre>";
+
+
 // Check if the reservation data is available
-if (!isset($_SESSION['car_id'], $_SESSION['marke'], $_SESSION['date_reservation'], $_SESSION['date_retour'])) {
+if (!isset($_SESSION['car_id'], $_SESSION['marke'], $_SESSION['price'], $_SESSION['date_reservation'], $_SESSION['date_retour'])) {
     echo "Booking information not found.";
     exit;
 }
@@ -58,6 +63,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
                     <div class="card shadow-sm">
                         <div class="card-body">
                             <p><strong><?= htmlspecialchars($_SESSION['marke']) ?></strong></p>
+                            <p><?= htmlspecialchars($_SESSION['price']) ?> €/day</p>
                             <p>Date of Reservation: <?= htmlspecialchars($_SESSION['date_reservation']) ?></p>
                             <p>Date of Retour: <?= htmlspecialchars($_SESSION['date_retour']) ?></p>
                         </div>
@@ -95,14 +101,15 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
             <form method="POST" action="/reservInfo.php">
                 <input type="hidden" name="car_id" value="<?= $_SESSION['car_id'] ?>">
                 <input type="hidden" name="id" value="<?= $_SESSION['user']['id'] ?>">
-                <button type="submit" class="btn btn-warning">Réserver</button>
+                <button type="submit" class="btn btn-warning mb-3">Réserver</button>
+
             </form>
         </div>
 
     </main>
 
     <footer style="background-color: #73AD48; 
-                  height: 70px; 
+                  height: 50px; 
                   position: fixed;
                   left: 0;
                   bottom: 0;

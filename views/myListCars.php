@@ -67,6 +67,9 @@
                     <!-- Enviar informações da div para a próxima página -->
                     <input type="hidden" name="car_id" value="<?= $car['car_id'] ?>">
                     <input type="hidden" name="marke" value="<?= $car['marke'] ?>">
+
+                    <input type="hidden" name="price" value="<?= htmlspecialchars($car['price']) ?>"> 
+
                     <input type="hidden" name="date_reservation" value="<?= $_SESSION['date_reservation'] ?>">
                     <input type="hidden" name="date_retour" value="<?= $_SESSION['date_retour'] ?>">
 

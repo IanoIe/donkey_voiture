@@ -7,12 +7,14 @@ class ReservInfoController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $car_id = filter_input(INPUT_POST, 'car_id', FILTER_VALIDATE_INT);
             $marke = htmlspecialchars($_POST['marke'] ?? '');
+            $price = htmlspecialchars($_POST['price'] ?? '');
             $date_reservation = htmlspecialchars($_POST['date_reservation'] ?? '');
             $date_retour = htmlspecialchars($_POST['date_retour'] ?? '');
 
             if ($car_id && $marke && $date_reservation && $date_retour) {
                 $_SESSION['car_id'] = $car_id;
                 $_SESSION['marke'] = $marke;
+                $_SESSION['price'] = $price;
                 $_SESSION['date_reservation'] = $date_reservation;
                 $_SESSION['date_retour'] = $date_retour;
 
@@ -36,19 +38,16 @@ class ReservInfoController {
 
         $city_name = $_SESSION['fullname'] ?? 'N/A';
         $carsMarke = $_SESSION['marke'] ?? 'N/A';
+        $price = $_SESSION['price'] ?? 'N/A';
         $date_reservation = $_SESSION['date_reservation'] ?? 'N/A';
         $date_retour = $_SESSION['date_retour'] ?? 'N/A';
 
-        $info = $reservInfo->getReservInfoUnik($carId, $city_name, $carsMarke, $date_reservation, $date_retour);
+        $info = $reservInfo->getReservInfoUnik($carId, $city_name, $price, $carsMarke, $date_reservation, $date_retour);
         require("./views/reservInfo.php");
     }
 
     public function reservInfoUser($idUser) {
-        error_log("Chegou no reservInfoUser() com idUser: " . $idUser);
-        try {
-             var_dump($idUser); // Depuração aqui
-             error_log("Buscando usuário com ID: " . $idUser); // Debug
-            
+        try {            
             $reservInfo = new ReservInfo();
             $user = $reservInfo->getUser($idUser);
 
@@ -62,7 +61,7 @@ class ReservInfoController {
                 exit();
             }
         } catch (Exception $ex) {
-            $_SESSION['error'] = "Erro ao recuperar informações do usuário.";
+            $_SESSION['error'] = "Error retrieving user information.".$ex;
             header("Location: ./error.php");
             exit();
         }
@@ -70,7 +69,7 @@ class ReservInfoController {
 
     public function handleReservationRequest() {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        if (isset($_POST['car_id'], $_POST['marke'], $_POST['date_reservation'], $_POST['date_retour'], $_POST['id']) &&
+        if (isset($_POST['car_id'], $_POST['marke'], $_POST['price'], $_POST['date_reservation'], $_POST['date_retour'], $_POST['id']) &&
             is_numeric($_POST['car_id']) && is_numeric($_POST['id'])) {
                 $saved = $this->saveReservationDetails();
                 if ($saved) {
@@ -78,12 +77,12 @@ class ReservInfoController {
                     header("Location: ./views/reservInfo.php");
                     exit();
                 } else {
-                    $_SESSION['error'] = "Erro ao salvar dados da reserva.";
+                    $_SESSION['error'] = "Error saving reservation data.";
                     header("Location: ./error.php");
                     exit();
                 }
             } else {
-                $_SESSION['error'] = "Dados incompletos para a reserva.";
+                $_SESSION['error'] = "Incomplete data for booking.";
                 header("Location: ./error.php");
                 exit();
             }
