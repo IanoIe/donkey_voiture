@@ -1,3 +1,4 @@
+/* Reseta o estilo global para elementos, mas sem afetar o header */
 *, *::after, *::before {
     margin: 0;
     padding: 0;
@@ -5,39 +6,53 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Nenhuma barra de rolagem horizontal */
+}
+
+/* Adicionando garantia para o header ter a largura total */
+header {
+    width: 100%;  /* Assegura que o header tenha 100% de largura */
+    margin: 0;    /* Remove qualquer margem extra */
+    padding: 0;   /* Remove padding se houver */
+}
+
 main {
     display: flex;
     flex-direction: column;
 }
 
-.trouve-voiture{
+.trouve-voiture {
     width: 100%;
     height: 400px;
     background-color: #E7E6E6;
 }
 
-#donkey_titre{
+#donkey_titre {
     margin: 50px 50px;
 }
 
-
+/* Restante do seu CSS */
 .left-align-table {
     margin-left: 0 !important;
-  }
-  
-  .table td, .table th {
-    text-align: center; /* centraliza texto das células */
-    vertical-align: middle;
-  }
+}
 
-  
-  .custom-table-wrapper {
+.table td, .table th {
+    text-align: center; /* Centraliza texto das células */
+    vertical-align: middle;
+}
+
+.custom-table-wrapper {
     width: 60%;             /* Diminui a largura da tabela */
     margin-left: 0;         /* Encosta na esquerda */
-  }
+}
 
-  .table th,
-  .table td {
+.table th,
+.table td {
     text-align: center;     /* Centraliza texto nas colunas */
     vertical-align: middle;
-  }
+}

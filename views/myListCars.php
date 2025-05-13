@@ -9,7 +9,8 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-warning margin:">
+    <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+        <div class="container-fluid">
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
@@ -33,8 +34,10 @@
                     </li>
                 </ul>
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
+</header>
+
 
     <main style="background-color: #73AD48; height: 125px;">
         <div>
@@ -44,37 +47,50 @@
         <div>
             <h3 style="transform: translateX(15%);">City: <?php echo $_SESSION['fullname'] ?> </h3>
         </div>
-        <div class="container mt-4">
-            <div class="row">
+
+        <!-- Usando container-fluid para o main, para ter largura total -->
+        <div class="container-fluid mt-4 min-vh-100">
+           <div class="row" style="max-width: 1300px; margin: 0 auto;">
                 <?php foreach ($cars as $car): ?>
-                <div class="col-md-4 mb-4">
-                    <div class="card shadow-sm">
-                        <div class="card-body border border-3">
-                            <h5 class="card-title"><?= htmlspecialchars($car['marke']) ?></h5>
-                            <p class="card-text"><strong>Date of Reservation:</strong> <?php echo $_SESSION['date_reservation']; ?></p>
-                            <p class="card-text"><strong>Date of Retour:</strong> <?php echo $_SESSION['date_retour']; ?></p>
-                            <form method="POST" action="/reservInfoIndex.php">
-                                <input type="hidden" name="car_id" value="<?= $car['id'] ?>">
-                                <button type="submit" class="btn btn-warning float-right">Réserver</button>
-                            </form>
-                        </div>
-                    </div>
-                 </div>
-                <?php endforeach; ?>
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm">
+            <div class="card-body border border-3">
+                <form method="POST" action="reservInfoIndex.php">
+                    <h5 class="card-title"><?= htmlspecialchars($car['marke']) ?></h5>
+                    <p class="card-text">
+                        <strong>Date of Reservation:</strong> <?= $_SESSION['date_reservation']; ?>
+                    </p>
+                    <p class="card-text">
+                        <strong>Date of Retour:</strong> <?= $_SESSION['date_retour']; ?>
+                    </p>
+
+                    <!-- Enviar informações da div para a próxima página -->
+                    <input type="hidden" name="car_id" value="<?= $car['car_id'] ?>">
+                    <input type="hidden" name="marke" value="<?= $car['marke'] ?>">
+                    <input type="hidden" name="date_reservation" value="<?= $_SESSION['date_reservation'] ?>">
+                    <input type="hidden" name="date_retour" value="<?= $_SESSION['date_retour'] ?>">
+
+                    <button type="submit" class="btn btn-warning float-end">Réserver</button>
+                </form>
             </div>
         </div>
     </div>
+<?php endforeach; ?>
 
+            </div>
+        </div>
 
     </main>
 
     <footer style="background-color: #73AD48; 
-                  height: 70px; 
-                  position: fixed;
-                  left: 0;
-                  bottom: 0;
-                  width: 100%;">
-    </footer>
+               height: 70px; 
+               position: fixed;
+               left: 0;
+               bottom: 0;
+               width: 100%;">
+    <!-- Footer content here -->
+</footer>
+
     
 </body>
 </html>

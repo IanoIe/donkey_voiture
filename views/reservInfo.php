@@ -1,5 +1,11 @@
 <?php
 session_start();
+// Verifica se os dados da reserva estão disponíveis
+if (!isset($_SESSION['car_id'], $_SESSION['marke'], $_SESSION['date_reservation'], $_SESSION['date_retour'])) {
+    echo "Informações da reserva não encontradas.";
+    exit;
+}
+$user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
 ?>
 
 <!DOCTYPE html>
@@ -46,33 +52,28 @@ session_start();
         </div>
         
         <div class="container mt-5">
-            <form method="POST" action="/reservInfo.php">
-                <div class="row">
-                    <div class="col-md-4 mb-4">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <p><?= htmlspecialchars($car_id = $_POST['car_id'] ?? null); ?></p>
-                                <p><strong>Marca:</strong> <?= htmlspecialchars($car_marke) ?></p>
-                                <p>Date of Reservation: <?=htmlspecialchars($date_reservation) ?></p>
-                                <p>Date of Retour: <?=htmlspecialchars($date_retour) ?></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 mb-4">
-                        <div>
-                            <div>
-                                <h2>Info</h2>
-                                <p>Last Name: <?= htmlspecialchars($user['lastName']) ?></p>
-                                <p>First Name: <?= htmlspecialchars($user['firstName']) ?></p>
-                                <p>Phone Number: <?= htmlspecialchars($user['phone']) ?></p>
-                            </div>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <p><strong><?= htmlspecialchars($_SESSION['marke']) ?></strong></p>
+                            <p>Date of Reservation: <?= htmlspecialchars($_SESSION['date_reservation']) ?></p>
+                            <p>Date of Retour: <?= htmlspecialchars($_SESSION['date_retour']) ?></p>
                         </div>
                     </div>
                 </div>
-            </form>
+
+            <div class="col-md-4 mb-4">
+                <?php if ($user): ?>
+                    <h2>Info</h2>
+                    <p><strong>Last Name:</strong> <?= htmlspecialchars($user['lastName']) ?></p>
+                    <p><strong>First Name:</strong> <?= htmlspecialchars($user['firstName']) ?></p>
+                    <p><strong>Phone Number:</strong> <?= htmlspecialchars($user['phone']) ?></p>
+                <?php else: ?>
+                    <p>Informações do usuário não disponíveis.</p>
+                <?php endif; ?>
+            </div>
         </div>
-            
 
         <div class="container mt-5">
             <div class="column">
@@ -89,8 +90,11 @@ session_start();
             </div>   
         </div><br>
 
-        <div style="width: 150px;">
-            <button type="submit" class="btn btn-warning float-right">Réserver</button>
+        <div style="display: flex; justify-content: flex-end; width: 90%;">
+            <form method="POST" action="/reservInfo.php">
+                <input type="hidden" name="car_id" value="<?= $_SESSION['car_id'] ?>">
+                <button type="submit" class="btn btn-warning">Réserver</button>
+            </form>
         </div>
 
     </main>
