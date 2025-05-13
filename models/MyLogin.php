@@ -15,7 +15,13 @@ class MyLogin extends Base {
             return $user['id'];
         }
         return false;
-    }    
+    }  
+    
+    public function getUserById($id) {
+        $stmt = $this->pdo->prepare("SELECT id, firstName, lastName, phone FROM user WHERE id = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }
 ?>
 

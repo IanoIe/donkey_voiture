@@ -1,8 +1,9 @@
 <?php
 session_start();
-// Verifica se os dados da reserva estão disponíveis
+
+// Check if the reservation data is available
 if (!isset($_SESSION['car_id'], $_SESSION['marke'], $_SESSION['date_reservation'], $_SESSION['date_retour'])) {
-    echo "Informações da reserva não encontradas.";
+    echo "Booking information not found.";
     exit;
 }
 $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
@@ -70,7 +71,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
                     <p><strong>First Name:</strong> <?= htmlspecialchars($user['firstName']) ?></p>
                     <p><strong>Phone Number:</strong> <?= htmlspecialchars($user['phone']) ?></p>
                 <?php else: ?>
-                    <p>Informações do usuário não disponíveis.</p>
+                    <p>User information not available.</p>
                 <?php endif; ?>
             </div>
         </div>
@@ -93,6 +94,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
         <div style="display: flex; justify-content: flex-end; width: 90%;">
             <form method="POST" action="/reservInfo.php">
                 <input type="hidden" name="car_id" value="<?= $_SESSION['car_id'] ?>">
+                <input type="hidden" name="id" value="<?= $_SESSION['user']['id'] ?>">
                 <button type="submit" class="btn btn-warning">Réserver</button>
             </form>
         </div>
