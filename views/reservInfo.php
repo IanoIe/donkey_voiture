@@ -1,6 +1,9 @@
 <?php
 session_start();
-
+if (!isset($_SESSION['user']['id'])) {
+    header("Location: /MyLogin.php");
+    exit;
+}
 // Check if the reservation data is available
 if (!isset($_SESSION['car_id'], $_SESSION['marke'], $_SESSION['price'], $_SESSION['date_reservation'], $_SESSION['date_retour'])) {
     echo "Booking information not found.";

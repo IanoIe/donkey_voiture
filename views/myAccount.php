@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['user']['id'])) {
+    header("Location: /MyLogin.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +30,7 @@
                 </ul>
                 <ul class="navbar-nav ms-5" style="width: 35%;">
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">My Account</a>
+                        <a class="nav-link text-white" href="/myAccount">My Account</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="#">My Reservations</a>
@@ -52,41 +59,21 @@
             <div>
                 <table>
                     <tbody>
-                    <?php
-                        if ($user) {
-                           foreach ($user as $ligne) {
-                                echo "<tr>
-                                         <th scope='row'>First Name:</th>
-                                         <td>{$ligne['firstName']}</td>
-                                      </tr>
-                                      <tr>
-                                         <th scope='row'>Last Name:</th>
-                                         <td>{$ligne['lastName']}</td>
-                                      </tr>
-                                      <tr>
-                                         <th scope='row'>Email:</th>
-                                         <td>
-                                            <a href='mailto:{$ligne['email']}' style='color: blue; text-decoration: underline;'>
-                                             {$ligne['email']} </a>
-                                         </td>
-                                       </tr>
-
-                                      <tr>
-                                         <th scope='row' style='padding-right: 20px;'>Phone Number:</th>
-                                         <td>{$ligne['phone']}</td>
-                                      </tr>";
-                            }
-                        } else {
-                              die("Query invalid");
-                        }
-                    ?>
+                        <?php if ($user): ?>
+                            <p><strong>Last Name :</strong> <?= htmlspecialchars($user['lastName']) ?></p>
+                            <p><strong>First Name :</strong> <?= htmlspecialchars($user['firstName']) ?></p>
+                            <p><strong>Email :</strong> <a href="mailto:<?= htmlspecialchars($user['email']) ?>" style="color: #0000FF; text-decoration: underline;"><?= htmlspecialchars($user['email']) ?></a></p>
+                            <p><strong>Phone Number :</strong> <?= htmlspecialchars($user['phone']) ?></p>
+                            <?php else: ?>
+                                <p>User information not available.</p>
+                        <?php endif; ?>
                     </tbody>
                 </table>
             </div>
-            <div style="display: inline-flex; gap: 10px; margin-top: 10px;">
-                <button onclick="window.location.href='modifier.php'">Modifier</button>
-                <button onclick="window.location.href='changer_mdp.php'">Changer de mot de passe</button>
-                <button onclick="window.location.href='supprimer_compte.php'"> Supprimer mon compte</button>
+            <div class="d-flex gap-2 mt-3">
+                <a href="modifier.php" class="btn btn-primary">Edit</a>
+                <a href="changer_mdp.php" class="btn btn-warning">Change password</a>
+                <a href="supprimer_compte.php" class="btn btn-danger">Delete my account</a>
             </div>
         </div>
 

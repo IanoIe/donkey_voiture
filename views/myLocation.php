@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['user']['id'])) {
+    header("Location: /MyLogin.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,7 +60,7 @@
                 </ul>
                 <ul class="navbar-nav ms-5" style="width: 35%;">
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">My Account</a>
+                        <a class="nav-link text-white" href="/myAccountIndex.php">My Account</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="#">My Reservations</a>

@@ -1,7 +1,9 @@
 <?php
 session_start();
-var_dump($myReservations);
-
+if (!isset($_SESSION['user']['id'])) {
+    header("Location: /MyLogin.php");
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
