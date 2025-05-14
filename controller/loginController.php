@@ -43,7 +43,7 @@ class loginController {
     public function logout() {
         session_unset();  
         session_destroy(); 
-        header("Location: MyLogin.php");
+        header("Location: /MyLogin.php");
         exit;
     }
 }

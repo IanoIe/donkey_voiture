@@ -1,4 +1,9 @@
-<?php   
+<?php 
+session_start();
+if (!isset($_SESSION['user']['id'])) {
+    header("Location: /MyLogin.php");
+    exit;
+}  
 require("./models/MyAccount.php");
 
     class myAccountController {

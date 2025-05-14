@@ -1,11 +1,6 @@
 <?php
 session_start();
 
-echo "<pre>";
-print_r($_SESSION);
-echo "</pre>";
-
-
 // Check if the reservation data is available
 if (!isset($_SESSION['car_id'], $_SESSION['marke'], $_SESSION['price'], $_SESSION['date_reservation'], $_SESSION['date_retour'])) {
     echo "Booking information not found.";
@@ -25,25 +20,29 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-warning margin:">
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav ms-auto">
+        <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+            <div class="container-fluid">
+                <ul class="navbar-nav me-auto">
+                    <?php if (isset($_SESSION['user'])): ?>
+                        <li class="nav-item">
+                            <a class="nav-link text-white">
+                                Mr. <?php echo htmlspecialchars($_SESSION['user']['firstName'] . ' ' . $_SESSION['user']['lastName']); ?>
+                            </a>
+                        </li>
+                    <?php endif; ?>
+                </ul>
+                <ul class="navbar-nav ms-5" style="width: 35%;">
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">Mr Dupont Durant</a>
+                        <a class="nav-link text-white" href="#">My Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">My Reservations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/myListCars.php">Find a Car</a>
                     </li>
                 </ul>
-                <ul class="navbar-nav text-white">
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="myAccount.php">Mon compte</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="myReservation.php">Mes réservations</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="#">Trouver une voiture</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link text-white" style="background-color: #5b9bd5; margin-right: 20px;" href="/controllers/AuthController.php?logout=true">Déconnexion</a>
                     </li>
@@ -79,10 +78,11 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
                 <?php else: ?>
                     <p>User information not available.</p>
                 <?php endif; ?>
+                <p><strong>Toral : </strong></p>
             </div>
         </div>
 
-        <div class="container mt-5">
+        <div class="container mt-25">
             <div class="column">
                 <input type="checkbox" id="scales" name="scales"/>
                 <label for="lavage">Lavage : 15€</label>
@@ -101,15 +101,14 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
             <form method="POST" action="/reservInfo.php">
                 <input type="hidden" name="car_id" value="<?= $_SESSION['car_id'] ?>">
                 <input type="hidden" name="id" value="<?= $_SESSION['user']['id'] ?>">
-                <button type="submit" class="btn btn-warning mb-3">Réserver</button>
-
+                <button type="submit" class="btn btn-warning mb-5">Réserver</button>
             </form>
         </div>
 
     </main>
 
     <footer style="background-color: #73AD48; 
-                  height: 50px; 
+                  height: 60px; 
                   position: fixed;
                   left: 0;
                   bottom: 0;

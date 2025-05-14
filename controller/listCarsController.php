@@ -1,5 +1,10 @@
 <?php
 session_start();
+if (!isset($_SESSION['user']['id'])) {
+    header("Location: /MyLogin.php");
+    exit;
+}
+
 require_once("./models/ListCars.php");
 require_once("./models/MyLocation.php");
 

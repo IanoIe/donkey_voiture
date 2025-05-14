@@ -10,25 +10,29 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-warning margin:">
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav ms-auto">
+        <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+            <div class="container-fluid">
+                <ul class="navbar-nav me-auto">
+                    <?php if (isset($_SESSION['user'])): ?>
+                        <li class="nav-item">
+                            <a class="nav-link text-white">
+                                Mr. <?php echo htmlspecialchars($_SESSION['user']['firstName'] . ' ' . $_SESSION['user']['lastName']); ?>
+                            </a>
+                        </li>
+                    <?php endif; ?>
+                </ul>
+                <ul class="navbar-nav ms-5" style="width: 35%;">
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">Mr Dupont Durant</a>
+                        <a class="nav-link text-white" href="#">My Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">My Reservations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/myListCars.php">Find a Car</a>
                     </li>
                 </ul>
-                <ul class="navbar-nav text-white">
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="#">Mon compte</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="#">Mes réservations</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="#">Trouver une voiture</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link text-white" style="background-color: #5b9bd5; margin-right: 20px;" href="/controllers/AuthController.php?logout=true">Déconnexion</a>
                     </li>
