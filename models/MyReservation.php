@@ -4,8 +4,6 @@ require_once("Base.php");
 
 class MyReservation extends Base {
     public function getReservationsByUser($userId) {
-        echo "Método chamado<br>";
-    var_dump($userId);
         try {
             $sql = "SELECT u.firstName AS firstName, u.lastName AS lastName, c.fullname AS city,
                            car.marke AS marke_car, r.date_reservation, r.date_retour
@@ -17,16 +15,14 @@ class MyReservation extends Base {
 
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute(['user_id' => $userId]);
-            echo "Entrou no método!<br>";
-var_dump($sql);
 
-            var_dump($sql);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $reservations = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $reservations;
         } catch (PDOException $ex) {
-            throw new Exception("Erro: " . $ex->getMessage());
+            // Mostrar el mensaje de error
+            echo 'Error: ' . $ex->getMessage();
+            return [];
         }
     }
 }
 ?>
-
-

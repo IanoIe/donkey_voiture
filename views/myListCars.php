@@ -29,13 +29,13 @@ if (!isset($_SESSION['user']['id'])) {
                 </ul>
                 <ul class="navbar-nav ms-5" style="width: 35%;">
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">My Account</a>
+                        <a class="nav-link text-white" href="/myAccountIndex.php">My Account</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">My Reservations</a>
+                        <a class="nav-link text-white" href="/MyReservationIndex.php">My Reservations</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="/myListCars.php">Find a Car</a>
+                        <a class="nav-link text-white" href="/location.php">Find a Car</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav">

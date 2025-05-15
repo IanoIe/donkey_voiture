@@ -14,6 +14,12 @@ if (!isset($_SESSION['user']['id'])) {
     <link rel="stylesheet" href="../assets/style.css">
     <title>My Reservation</title>
 </head>
+
+<style>
+    .table th {
+        color:rgb(96, 178, 233);;
+       }
+</style>
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-warning">
@@ -29,13 +35,13 @@ if (!isset($_SESSION['user']['id'])) {
                 </ul>
                 <ul class="navbar-nav ms-5" style="width: 35%;">
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">My Account</a>
+                        <a class="nav-link text-white" href="/myAccountIndex.php">My Account</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">My Reservations</a>
+                        <a class="nav-link text-white" href="/MyReservationIndex.php">My Reservations</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="/myListCars.php">Find a Car</a>
+                        <a class="nav-link text-white" href="/location.php">Find a Car</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav">
@@ -47,15 +53,16 @@ if (!isset($_SESSION['user']['id'])) {
         </nav>
     </header>
 
-    <main style="background-color: #73AD48; height: 125px;">
-        <div>
-            <h1 class="text-white text-center mt-5" id="donkey_titre">DONKEY VOITURE</h1>
-        </div>
-
-        <h2 class="mb-4">My Reservation</h2>
+    <main style="min-height: 125px;">
+        <nav style="background-color: #73AD48; height: 100px;">
+             <div>
+                <h1 class="text-white text-center mt-4" id="donkey_titre">DONKEY VOITURE</h1>
+            </div>
+        </nav>
+        <h2 class="mt-5" style="margin-left: 90px;">My Reservation</h2>
         <div class="table-responsive custom-table-wrapper">
-            <table class="table">
-                <thead class="table-dark">
+            <table class="table table-bordered table-striped mx-auto mt-4" style="width: 80%;">
+                <thead class="table">
                     <tr>
                         <th>City</th>
                         <th>Car</th>
@@ -65,30 +72,29 @@ if (!isset($_SESSION['user']['id'])) {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                        if (isset($myReservations) && count($myReservations) > 0) {
-                            foreach ($myReservations as $reservation) {
-                                echo "<tr>
-                                        <td>" . htmlspecialchars($reservation['fullname']) . "</td>
-                                        <td>" . htmlspecialchars($reservation['marke_car']) . "</td>
-                                        <td>" . htmlspecialchars($reservation['date_reservation']) . "</td>
-                                        <td>" . htmlspecialchars($reservation['date_retour']) . "</td>
-                                        <td>
-                                           <a class='btn btn-primary btn-sm me-1' href='edit.php?id=" . urlencode($reservation['id']) . "'>Edit</a>
-                                           <a class='btn btn-warning btn-sm' href='cancel.php?id=" . urlencode($reservation['id']) . "'>Cancel</a>
-                                        </td>
-                                    </tr>";
-                            }
-                        } else {
-                            echo "<tr><td colspan='5' class='text-center'>No reservation found or query error.</td></tr>";
-                        }
-                    ?>
+                    <?php if (!empty($myReservations)): ?>
+                        <?php foreach ($myReservations as $reservation): ?>
+                            <tr>
+                                <td><?= htmlspecialchars($reservation['city']) ?></td>
+                                <td><?= htmlspecialchars($reservation['marke_car']) ?></td>
+                                <td><?= htmlspecialchars($reservation['date_reservation']) ?></td>
+                                <td><?= htmlspecialchars($reservation['date_retour']) ?></td>
+                                <td>
+                                    <a class="btn btn-primary btn-sm me-1" href="edit.php?id=<?= urlencode($reservation['id']) ?>">Edit</a>
+                                    <a class="btn btn-warning btn-sm" href="cancel.php?id=<?= urlencode($reservation['id']) ?>">Cancel</a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="5" class="text-center">No reservation found or query error.</td>
+                            </tr>
+                    <?php endif; ?>
                 </tbody>
             </table>
         </div>
     </main>
 
-    <footer style="background-color: #73AD48; height: 70px; position: fixed; left: 0; bottom: 0; width: 100%;">
-    </footer>
+    <footer style="background-color: #73AD48; height: 70px; position: fixed; left: 0; bottom: 0; width: 100%;"></footer>
 </body>
 </html>
