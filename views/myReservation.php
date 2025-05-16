@@ -1,6 +1,9 @@
 <?php
+// Start the session to access session variables
 session_start();
+// Check if the user is logged in by verifying the 'id' in the session
 if (!isset($_SESSION['user']['id'])) {
+    // If not logged in, redirect to the login page
     header("Location: /MyLogin.php");
     exit;
 }

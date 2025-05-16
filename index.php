@@ -1,10 +1,8 @@
 <?php
+     // Include the login controller file to access its functionalities
      require_once('./controller/loginController.php');
+     // Instantiate the loginController class
      $login = new loginController();
-     $login->login();
-  
-  
-  // require_once("./controller/reservationController.php");
-   // require_once("./controller/myAccountController.php");
-        
+     // Call the login method to process the login request
+     $login->login();        
 ?>

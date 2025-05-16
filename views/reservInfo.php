@@ -1,9 +1,13 @@
 <?php
+// Start the session to access session variables
 session_start();
+// Check if the user is logged in by verifying the 'id' in the session
 if (!isset($_SESSION['user']['id'])) {
+    // If not logged in, redirect to the login page
     header("Location: /MyLogin.php");
     exit;
 }
+
 // Check if the reservation data is available
 if (!isset($_SESSION['car_id'], $_SESSION['marke'], $_SESSION['price'], $_SESSION['date_reservation'], $_SESSION['date_retour'])) {
     echo "Booking information not found.";

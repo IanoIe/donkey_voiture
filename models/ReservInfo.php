@@ -2,12 +2,13 @@
 session_start();
 require_once("Base.php");
 
+/** Class ReservInfo
+ * Handles retrieval of reservation and user information from the database. */
 class ReservInfo extends Base {
-    /**
-     * Get detailed information about a specific reservation.
-     * @param int $carId Car ID.
-     * @return array|null Reservation details or null if not found.
-     */
+     /** Retrieves detailed information about a specific reservation based on the car ID.
+     * @param int $carId The ID of the car associated with the reservation.
+     * @return array|null An associative array containing reservation details, or null if not found.
+     * @throws Exception If a database error occurs during retrieval. */
     public function getReservInfoUnik($carId) {
         try {
             $sql = "SELECT car.marke, reservation.price, reservation.date_reservation, reservation.date_retour
@@ -29,11 +30,9 @@ class ReservInfo extends Base {
         }
     }
 
-    /**
-     *Gets information about a user by ID.
-     * @param int $idUser User ID.
-     * @return array|null User data or null if not found.
-     */
+    /** Retrieves user information based on the user ID.
+     * @param int $idUser The ID of the user.
+     * @return array|null An associative array containing user details, or null if not found. */
     public function getUser($idUser) {
         try {
             $sql = "SELECT id, lastName, firstName, phone FROM user WHERE id = :id";

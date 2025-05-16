@@ -1,6 +1,9 @@
 <?php
+// Start the session to access session variables
 session_start();
+// Check if the user is logged in by verifying the 'id' in the session
 if (!isset($_SESSION['user']['id'])) {
+    // If not logged in, redirect to the login page
     header("Location: /MyLogin.php");
     exit;
 }
@@ -99,12 +102,12 @@ if (!isset($_SESSION['user']['id'])) {
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="birthday">Booking Date:</label>
+                        <label for="date_reservation">Booking Date:</label>
                         <input type="date" id="date_reservation" name="date_reservation" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="birthday">Return Date:</label>
+                        <label for="date_retour">Return Date:</label>
                         <input type="date" id="date_retour" name="date_retour" required>
                     </div>
 

@@ -5,8 +5,17 @@ if (!isset($_SESSION['user']['id'])) {
     exit;
 }
 require_once("./models/ReservInfo.php");
-class ReservInfoController {
 
+
+/** Class ReservInfoController
+ * Handles reservation information processes, including saving reservation details,
+ * displaying reservation information, and managing reservation requests. */
+class ReservInfoController {
+    /** Saves reservation details from POST request into session variables.
+     * Validates the incoming POST data for reservation details and stores them
+     * in session variables for later use. Redirects to the reservation information
+     * view upon successful validation or to an error page if validation fails.
+     * @return void */
     public function saveReservationDetails() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $car_id = filter_input(INPUT_POST, 'car_id', FILTER_VALIDATE_INT);
@@ -36,6 +45,11 @@ class ReservInfoController {
         }
     }
 
+    /** Displays reservation information based on session data.
+     * Retrieves reservation details from session variables and fetches additional
+     * information using the ReservInfo model. Loads the reservation information view
+     * with the retrieved data.
+     * @return void */
     public function reservInfo() {
         $carId = isset($_SESSION['car_id']) && is_numeric($_SESSION['car_id']) ? (int) $_SESSION['car_id'] : null;
         $reservInfo = new ReservInfo();
@@ -50,6 +64,12 @@ class ReservInfoController {
         require("./views/reservInfo.php");
     }
 
+    /** Retrieves and stores user information based on user ID.
+     * Fetches user data using the provided user ID and stores it in the session.
+     * Redirects to the reservation information view upon successful retrieval or
+     * to an error page if the user is not found or an exception occurs.
+     * @param int $idUser The ID of the user.
+     * @return void */
     public function reservInfoUser($idUser) {
         try {            
             $reservInfo = new ReservInfo();
@@ -71,6 +91,11 @@ class ReservInfoController {
         }
     }
 
+    /** Handles reservation request from POST data.
+     * Validates the incoming POST data for reservation and user details. If valid,
+     * saves the reservation details and retrieves user information. Redirects to the
+     * reservation information view upon success or to an error page if validation fails.
+     * @return void */
     public function handleReservationRequest() {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_POST['car_id'], $_POST['marke'], $_POST['price'], $_POST['date_reservation'], $_POST['date_retour'], $_POST['id']) &&
