@@ -105,7 +105,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
         </div><br>
 
         <div style="display: flex; justify-content: flex-end; width: 90%;">
-            <form method="POST" action="/reservInfo.php">
+            <form method="POST">
                 <input type="hidden" name="car_id" value="<?= $_SESSION['car_id'] ?>">
                 <input type="hidden" name="id" value="<?= $_SESSION['user']['id'] ?>">
                 <button type="submit" class="btn btn-warning mb-5">Réserver</button>

@@ -25,5 +25,25 @@ class MyAccount extends Base {
         $stmt->execute([$userId]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    /** Deletes a user from the database based on their user ID.
+     * This method prepares and executes a DELETE SQL statement to remove the user
+     * record from the 'user' table where the 'id' matches the provided user ID.
+     * It returns true if the deletion is successful (i.e., one or more rows are affected),
+     * and false if an error occurs during the process.
+     * @param int $userId The ID of the user to be deleted.
+     * @return bool Returns true if the deletion was successful, false otherwise. */
+    public function deleteUser($userId) {
+        try {
+            // Prepare the DELETE SQL statement with a named placeholder for the user ID.
+            $sql = "DELETE FROM user WHERE id = :id";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute(['id' => $userId]);
+            return $stmt->rowCount() > 0; // Returns true if at least one row was deleted
+        } catch (Exception $ex) {
+            echo "Erro: " . $ex->getMessage();
+            return false;
+        }
+    }
 }
 ?>

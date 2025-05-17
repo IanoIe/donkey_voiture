@@ -76,7 +76,9 @@ if (!isset($_SESSION['user']['id'])) {
             <div class="d-flex gap-2 mt-3">
                 <a href="modifier.php" class="btn btn-primary">Edit</a>
                 <a href="changer_mdp.php" class="btn btn-warning">Change password</a>
-                <a href="supprimer_compte.php" class="btn btn-danger">Delete my account</a>
+                <form method="post" action="/myAccountIndex.php" onsubmit="return confirm('Are you sure you want to delete your account? This action is irreversible.');">
+                    <button type="submit" name="delete_account" class="btn btn-danger">Delete my account</button>
+                </form>
             </div>
         </div>
 

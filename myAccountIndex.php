@@ -1,8 +1,14 @@
 <?php
-     // Include the location controller class file
-     require_once('./controller/myAccountController.php');
-     // Create an instance of the locationController class
-     $myAccounts = new myAccountController();
-     // Call the myAccount method to handle the location functionality
-     $myAccounts->myAccount();
+      // Include the controller file
+     require_once('./controller/myAccountController.php'); 
+     // Instantiate the controller
+     $controller = new myAccountController();
+     // Check if the form to delete the account was submitted
+     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_account'])) {
+          // Call the delete method to handle account deletion
+          $controller->delete();
+     } else {
+          // Otherwise, display the user's account information
+          $controller->myAccount();
+    }
 ?>
