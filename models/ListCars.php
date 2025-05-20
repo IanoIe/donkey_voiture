@@ -17,7 +17,6 @@ class ListCars extends Base {
         try {
             // Convert booking date to Y-m-d format
             $date_reservation = DateTime::createFromFormat('d/m/Y', $date_reservation)->format('Y-m-d');
-            // Updated SQL query to include price from `car` table
             $sql = "SELECT city.fullname, car.id AS car_id, car.marke, car.price FROM car 
                     INNER JOIN city ON car.city_id = city.id
                     LEFT JOIN reservation r ON car.id = r.car_id 
@@ -45,7 +44,6 @@ class ListCars extends Base {
         // Convert dates to Y-m-d format
         $data_reservation = DateTime::createFromFormat('d/m/Y', $date_reservation)->format('Y-m-d');
         $data_retour = DateTime::createFromFormat('d/m/Y', $date_retour)->format('Y-m-d');
-        // Check if the return date is before or the same as the reservation date
         if ($data_retour <= $data_reservation) {
             return 'The return date must be after the reservation date.';
         }

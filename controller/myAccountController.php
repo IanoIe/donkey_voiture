@@ -56,45 +56,82 @@ class myAccountController {
      * 7. If any validation fails, sets an appropriate error message.
      * 8. Includes the change password view to display the form and any messages. */
     public function changePassword() {
-        // Retrieve the current user's ID from the session
         $userId = $this->userId; 
-        // Initialize the message variable to store feedback for the user
         $message = '';
-
-        // Check if the form has been submitted via POST
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Retrieve and sanitize form inputs
             $currentPassword = $_POST['current_password'] ?? '';
             $newPassword = $_POST['new_password'] ?? '';
             $confirmPassword = $_POST['confirm_password'] ?? '';
-
-            // Validate that the new password and confirmation match
             if ($newPassword !== $confirmPassword) {
                 $message = "The new passwords do not match.";
             }
-            // Verify that the current password is correct
             elseif (!$this->model->checkPassword($userId, $currentPassword)) {
                 $message = "Incorrect current password.";
             }
-            // Proceed to update the password
             else {
-                // Attempt to update the password in the database
                 if ($this->model->updatePassword($userId, $newPassword)) {
-                    // Destroy the current session to log the user out
                     session_destroy();
-                    // Redirect the user to the login page
                     header('Location: /MyLogin.php');
                     exit;
                 } else {
-                    // Set an error message if the password update fails
                     $message = "Error updating the password.";
                 }
             }
         }
-        // Include the change password view to display the form and any messages
         include("./views/changePassword.php");
     }
-}
+
+    /** Handles the user profile update process.
+     * This method performs the following actions:
+     * 1. Checks if the request method is POST to process form submission.
+     * 2. Retrieves the current user data from the database.
+     * 3. Compares each submitted field with the current data to identify changes.
+     * 4. If changes are detected, updates the user's information in the database.
+     * 5. Updates the session data with the new user information.
+     * 6. Redirects to the account page upon successful update.
+     * 7. If no changes are detected or an error occurs, displays the appropriate message. */
+    public function updateUser() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $currentUser = $this->model->readMyAccount($this->userId);
+            $updatedFields = [];
+
+            if (isset($_POST['firstName']) && trim($_POST['firstName']) !== $currentUser['firstName']) {
+                $updatedFields['firstName'] = trim($_POST['firstName']);
+            }
+            if (isset($_POST['lastName']) && trim($_POST['lastName']) !== $currentUser['lastName']) {
+                $updatedFields['lastName'] = trim($_POST['lastName']);
+            }
+            if (isset($_POST['email']) && trim($_POST['email']) !== $currentUser['email']) {
+                $updatedFields['email'] = trim($_POST['email']);
+            }
+            if (isset($_POST['phone']) && trim($_POST['phone']) !== $currentUser['phone']) {
+                $updatedFields['phone'] = trim($_POST['phone']);
+            }
+            if (empty($updatedFields)) {
+                $message = "Nenhuma alteração foi feita.";
+                $user = $currentUser;
+                require("./views/edit.php");
+                return;
+            }
+            $success = $this->model->updateUser($this->userId, $updatedFields);
+
+            if ($success) {
+                foreach ($updatedFields as $key => $value) {
+                    $_SESSION['user'][$key] = $value;
+                }
+                header("Location: /myAccountIndex.php?update=success");
+                exit;
+            } else {
+                $message = "Erro ao atualizar os dados.";
+                $user = array_merge($currentUser, $updatedFields);
+                require("./views/edit.php");
+            }
+        } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            $user = $this->model->readMyAccount($this->userId);
+            require("./views/edit.php");
+        }
+    }
+ }
 ?>
 
 

@@ -39,7 +39,6 @@ class ReservInfo extends Base {
             $stmt = $this->pdo->prepare($sql);
             $stmt->bindParam(':id', $idUser, PDO::PARAM_INT);
             $stmt->execute();
-
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             return $result ?: null;
         } catch (Exception $ex) {

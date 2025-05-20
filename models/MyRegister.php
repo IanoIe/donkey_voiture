@@ -21,11 +21,8 @@ class MyRegister extends Base{
      * @param string $pass      User's password in plain text.
      * @return bool Returns true on successful insertion, false otherwise. */
     public function createRegister($firstName, $lastName, $gender, $phone, $email, $pass) {
-        // Hash the user's password using the default algorithm (currently BCRYPT)
         $passHash = password_hash($pass, PASSWORD_DEFAULT);
-         // Prepare the SQL statement to insert user details into the 'user' table
         $stmt = $this->pdo->prepare("INSERT INTO user (firstName, lastName, gender, phone, email, pass) VALUES (?, ?, ?, ?, ?, ?)");
-        // Execute the prepared statement with the provided user details.
         return $stmt->execute([$firstName, $lastName, $gender, $phone, $email, $passHash]);
     }
 }
