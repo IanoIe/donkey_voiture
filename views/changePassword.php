@@ -12,8 +12,8 @@ unset($_SESSION['message']);
     <title>Change Password</title>
 </head>
 <body class="bg-light">
-    <section style="background-color: #73AD48; height: 200px; width:100%;">
-        <h1 class="text-white text-center mt-5">DONKEY VOITURE</h1>
+    <section style="background-color: #73AD48; height: 140px; width:100%;">
+        <h1 class="text-white text-center" style="padding-top: 40px;">DONKEY VOITURE</h1>
     </section>
 
     <div class="container vh-80 d-flex justify-content-center align-items-center">
@@ -46,7 +46,5 @@ unset($_SESSION['message']);
             </form>
         </div>
     </div>
- 
-    
 </body>
 </html>
