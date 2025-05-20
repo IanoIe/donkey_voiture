@@ -44,6 +44,56 @@ class myAccountController {
             exit;
         }
     }
+
+    /** Handles the password change process for the authenticated user.
+     * This method performs the following steps:
+     * 1. Checks if the request method is POST to process form submission.
+     * 2. Retrieves and sanitizes the current, new, and confirmation passwords from the POST data.
+     * 3. Validates that the new password and confirmation match.
+     * 4. Verifies that the current password is correct using the model's checkPassword method.
+     * 5. If validations pass, updates the password using the model's updatePassword method.
+     * 6. Upon successful update, destroys the current session and redirects to the login page.
+     * 7. If any validation fails, sets an appropriate error message.
+     * 8. Includes the change password view to display the form and any messages. */
+    public function changePassword() {
+        // Retrieve the current user's ID from the session
+        $userId = $this->userId; 
+        // Initialize the message variable to store feedback for the user
+        $message = '';
+
+        // Check if the form has been submitted via POST
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Retrieve and sanitize form inputs
+            $currentPassword = $_POST['current_password'] ?? '';
+            $newPassword = $_POST['new_password'] ?? '';
+            $confirmPassword = $_POST['confirm_password'] ?? '';
+
+            // Validate that the new password and confirmation match
+            if ($newPassword !== $confirmPassword) {
+                $message = "The new passwords do not match.";
+            }
+            // Verify that the current password is correct
+            elseif (!$this->model->checkPassword($userId, $currentPassword)) {
+                $message = "Incorrect current password.";
+            }
+            // Proceed to update the password
+            else {
+                // Attempt to update the password in the database
+                if ($this->model->updatePassword($userId, $newPassword)) {
+                    // Destroy the current session to log the user out
+                    session_destroy();
+                    // Redirect the user to the login page
+                    header('Location: /MyLogin.php');
+                    exit;
+                } else {
+                    // Set an error message if the password update fails
+                    $message = "Error updating the password.";
+                }
+            }
+        }
+        // Include the change password view to display the form and any messages
+        include("./views/changePassword.php");
+    }
 }
 ?>
 
