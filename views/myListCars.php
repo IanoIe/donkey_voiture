@@ -66,7 +66,7 @@ if (!isset($_SESSION['user']['id'])) {
                     <div class="col-md-4 mb-4">
                         <div class="card shadow-sm">
                             <div class="card-body border border-3">
-                                <form method="POST" action="reservInfoIndex.php">
+                                <form method="POST" action="/reservInfoIndex.php">
                                     <h5 class="card-title"><?= htmlspecialchars($car['marke']) ?></h5>
                                     <p class="card-text">
                                         <strong>Date of Reservation:</strong> <?= $_SESSION['date_reservation']; ?>

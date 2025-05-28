@@ -1,21 +1,15 @@
 <?php
-// Start the session to access session variables
 session_start();
-// Check if the user is logged in by verifying the 'id' in the session
 if (!isset($_SESSION['user']['id'])) {
-    // If not logged in, redirect to the login page
     header("Location: /MyLogin.php");
     exit;
 }
-
-// Check if the reservation data is available
 if (!isset($_SESSION['car_id'], $_SESSION['marke'], $_SESSION['price'], $_SESSION['date_reservation'], $_SESSION['date_retour'])) {
     echo "Booking information not found.";
     exit;
 }
-$user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
+$user = $_SESSION['user'];
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -104,10 +98,15 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
             </div>   
         </div><br>
 
-        <div style="display: flex; justify-content: flex-end; width: 90%;">
-            <form method="POST">
-                <input type="hidden" name="car_id" value="<?= $_SESSION['car_id'] ?>">
-                <input type="hidden" name="id" value="<?= $_SESSION['user']['id'] ?>">
+        <div class="d-flex justify-content-end w-90 mt-4">
+            <form method="POST" action="/reservInfoIndex.php">
+                <input type="hidden" name="car_id" value="<?= htmlspecialchars($_SESSION['car_id'] ?? '') ?>">
+                <input type="hidden" name="marke" value="<?= htmlspecialchars($_SESSION['marke'] ?? '') ?>">
+                <input type="hidden" name="price" value="<?= htmlspecialchars($_SESSION['price'] ?? '') ?>">
+                <input type="hidden" name="date_reservation" value="<?= htmlspecialchars($_SESSION['date_reservation'] ?? '') ?>">
+                <input type="hidden" name="date_retour" value="<?= htmlspecialchars($_SESSION['date_retour'] ?? '') ?>">
+                <input type="hidden" name="user_id" value="<?= htmlspecialchars($user['id'] ?? '') ?>">
+                <input type="hidden" name="action" value="saveReservationToDatabase">
                 <button type="submit" class="btn btn-warning mb-5">Réserver</button>
             </form>
         </div>

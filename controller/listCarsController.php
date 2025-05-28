@@ -46,7 +46,6 @@ class listCarsController {
                     // Convert to d/m/Y format
                     $date_reservation = $data_reservation->format('d/m/Y');
                     $date_retour = $data_retour->format('d/m/Y');
-                    // Save in session
                     $_SESSION['fullname'] = $location->getCityById($cityId)['fullname'] ?? '';
                     $_SESSION['date_reservation'] = $date_reservation;
                     $_SESSION['date_retour'] = $date_retour;
